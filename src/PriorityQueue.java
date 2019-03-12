@@ -1,6 +1,7 @@
 import be.ac.ua.ansymo.adbc.annotations.ensures;
 import be.ac.ua.ansymo.adbc.annotations.invariant;
 import be.ac.ua.ansymo.adbc.annotations.requires;
+import java.lang.reflect.Array;
 
 @invariant ({	"$this.nbElements <= $this.heap.length",
 				"$this.nbElements >= 0"
@@ -8,7 +9,13 @@ import be.ac.ua.ansymo.adbc.annotations.requires;
 public class PriorityQueue<K extends Comparable<K>, V> {
 	private Node<K, V>[] heap;
 	private int nbElements;
-	
+
+	public PriorityQueue()
+	{
+		this.nbElements = 0;
+		this.heap = new Node[0];
+	}
+
 	private class Node<K extends Comparable<K>, V>{
 		private K key;
 		private V value;
