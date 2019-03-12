@@ -47,10 +47,25 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 	@ensures	({	"$this.nbElements == $old($this.nbElements) - 1",
 				})
 	public V remove() {
-		return null;
+		V return_value = (V) this.min().getValue();
+		this.heap[0] = this.heap[this.heap.length-1];
+		this.nbElements--;
+		this.settleHeap(0);
+
+		if (this.nbElements <= heap.length/4)
+		{
+			Node[] newHeap = new Node[heap.length/4];
+			for(int i = 0; i < newHeap.length; i++)
+			{
+				newHeap[i] = this.heap[i];
+			}
+			this.heap = newHeap;
+		}
+
+		return return_value;
 	}
 	
-	public Node min() {
+	public Node<K, V> min() {
 		return heap[0];
 	}
 
