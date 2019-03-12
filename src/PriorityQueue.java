@@ -7,7 +7,7 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 	private Node<K, V>[] heap;
 	private int nbElements;
 
-	public PriorityQueue(K key, V value)
+	public PriorityQueue()
 	{
 		this.nbElements = 0;
 		this.heap = new Node[0];
