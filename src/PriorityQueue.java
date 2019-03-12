@@ -32,6 +32,12 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 				})
 	public void insert(K key, V value) {
 		Node insertNode = new Node(key, value);
+		if(nbElements >= heap.length) {
+			copyAndDoubleHeap();
+		}
+		heap[nbElements] = insertNode;
+		trickleUp(nbElements);
+		nbElements++;
 	}
 	
 	@requires 	({	"$this.nbElements != 0",
@@ -95,5 +101,13 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 			leftCompare = heap[elem].getKey().compareTo(heap[leftChild(elem)].getKey());
 			rightCompare = heap[elem].getKey().compareTo(heap[rightChild(elem)].getKey());
 		}
+	}
+	
+	private void copyAndDoubleHeap() {
+		Node[] newHeap = new Node[heap.length * 2];
+		for(int i=0; i<heap.length; i++) {
+			newHeap[0] = heap[0];
+		}
+		heap = newHeap;
 	}
 }
