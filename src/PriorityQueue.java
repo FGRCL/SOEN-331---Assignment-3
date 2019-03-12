@@ -22,16 +22,16 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 	}
 
 	
-	private void insert(K key, V value) {
+	public void insert(K key, V value) {
 		Node insertNode = new Node(key, value);
 	}
 	
-	private V remove() {
+	public V remove() {
 		return null;
 	}
 	
-	private V min() {
-		return null;
+	public Node min() {
+		return heap[0];
 	}
 	
 	private int parent(int i) { 
