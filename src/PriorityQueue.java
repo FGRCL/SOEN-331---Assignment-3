@@ -45,6 +45,14 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 	public Node min() {
 		return heap[0];
 	}
+
+	public boolean contains(V value)
+	{
+		for (Node node:this.heap)
+			if (node.getValue().equals(value))
+				return true;
+		return false;
+	}
 	
 	private int parent(int i) { 
 		return ((i-1)/2);
