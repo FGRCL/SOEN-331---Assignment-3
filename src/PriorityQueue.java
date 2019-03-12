@@ -1,3 +1,5 @@
+import be.ac.ua.ansymo.adbc.annotations.ensures;
+import be.ac.ua.ansymo.adbc.annotations.requires;
 
 public class PriorityQueue<K extends Comparable<K>, V> {
 	private Node<K, V>[] heap;
@@ -21,11 +23,21 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		}
 	}
 
-	
+	@requires 	({	"key != null",
+					"key.getClass() == K",
+					"value.getClass() == V"
+				})
+	@ensures	({	"$this.nbElements == $old($this.nbElements) + 1",
+					"this.heap.contains(new Node(key, value))"
+				})
 	public void insert(K key, V value) {
 		Node insertNode = new Node(key, value);
 	}
-	
+
+	@requires 	({	"$this.nbElements != 0",
+				})
+	@ensures	({	"$this.nbElements == $old($this.nbElements) - 1",
+				})
 	public V remove() {
 		return null;
 	}
