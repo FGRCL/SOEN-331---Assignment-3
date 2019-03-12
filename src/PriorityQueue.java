@@ -2,7 +2,9 @@ import be.ac.ua.ansymo.adbc.annotations.ensures;
 import be.ac.ua.ansymo.adbc.annotations.invariant;
 import be.ac.ua.ansymo.adbc.annotations.requires;
 
-@invariant ({	})
+@invariant ({	"$this.nbElements <= $this.heap.length",
+				"$this.nbElements >= 0"
+			})
 public class PriorityQueue<K extends Comparable<K>, V> {
 	private Node<K, V>[] heap;
 	private int nbElements;
