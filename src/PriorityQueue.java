@@ -1,9 +1,8 @@
 import be.ac.ua.ansymo.adbc.annotations.ensures;
 import be.ac.ua.ansymo.adbc.annotations.invariant;
 import be.ac.ua.ansymo.adbc.annotations.requires;
-import java.lang.reflect.Array;
 
-@invariant ({	"$this.nbElements <= $this.heap.length",
+@invariant ({	"$this.nbElements <= $this.getSize()",
 				"$this.nbElements >= 0"
 			})
 public class PriorityQueue<K extends Comparable<K>, V> {
@@ -27,20 +26,20 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 			return value;
 		}
 	}
-	
+
 	public PriorityQueue()
 	{
 		this.nbElements = 0;
 		this.heap = new Node[0];
 	}
 
-
 	@requires 	({	"key != null",
-					"key.getClass() == K",
-					"value.getClass() == V"
+					"value != null",
+					"key.getClass().equals(K.class)",
+					"value.getClass().equals(V.class)"
 				})
 	@ensures	({	"$this.nbElements == $old($this.nbElements) + 1",
-					"this.contains(new Node(key, value))"
+					"$this.contains(value) = $old($this.contains(value)) + 1"
 				})
 	public void insert(K key, V value) {
 		Node insertNode = new Node(key, value);
@@ -65,14 +64,15 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		return heap[0];
 	}
 
-	public boolean contains(V value)
+	private int contains(V value)
 	{
+		int counter = 0;
 		for (Node node:this.heap)
 			if (node.getValue().equals(value))
-				return true;
-		return false;
+				counter++;
+		return counter;
 	}
-	
+
 	private int parent(int i) { 
 		return ((i-1)/2);
 	}
@@ -97,6 +97,10 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		Node temp = heap[a];
 		heap[a] = heap[b];
 		heap[b] = temp;
+	}
+
+	private int getSize(){
+		return heap.length;
 	}
 	
 	private void trickleUp(int elem) {
