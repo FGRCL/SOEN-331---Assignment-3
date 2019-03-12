@@ -1,17 +1,14 @@
 import be.ac.ua.ansymo.adbc.annotations.ensures;
+import be.ac.ua.ansymo.adbc.annotations.invariant;
 import be.ac.ua.ansymo.adbc.annotations.requires;
-
 import java.lang.reflect.Array;
 
+@invariant ({	"$this.nbElements <= $this.heap.length",
+				"$this.nbElements >= 0"
+			})
 public class PriorityQueue<K extends Comparable<K>, V> {
 	private Node<K, V>[] heap;
 	private int nbElements;
-
-	public PriorityQueue()
-	{
-		this.nbElements = 0;
-		this.heap = new Node[0];
-	}
 
 	private class Node<K extends Comparable<K>, V>{
 		private K key;
@@ -30,13 +27,20 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 			return value;
 		}
 	}
+	
+	public PriorityQueue()
+	{
+		this.nbElements = 0;
+		this.heap = new Node[0];
+	}
+
 
 	@requires 	({	"key != null",
 					"key.getClass() == K",
 					"value.getClass() == V"
 				})
 	@ensures	({	"$this.nbElements == $old($this.nbElements) + 1",
-					"this.heap.contains(new Node(key, value))"
+					"this.contains(new Node(key, value))"
 				})
 	public void insert(K key, V value) {
 		Node insertNode = new Node(key, value);
@@ -45,11 +49,18 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 	@requires 	({	"$this.nbElements != 0",
 				})
 	@ensures	({	"$this.nbElements == $old($this.nbElements) - 1",
+					"!$this.contains($old($this.min()))",
+					"$result != null"
 				})
 	public V remove() {
 		return null;
 	}
-	
+
+	@requires 	({	"$this.nbElements != 0",
+				})
+	@ensures	({	"$this.nbElements == $old($this.nbElements",
+					"$result != null"
+				})
 	public Node min() {
 		return heap[0];
 	}
