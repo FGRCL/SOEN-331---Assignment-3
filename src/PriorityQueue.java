@@ -1,10 +1,18 @@
 import be.ac.ua.ansymo.adbc.annotations.ensures;
 import be.ac.ua.ansymo.adbc.annotations.requires;
 
+import java.lang.reflect.Array;
+
 public class PriorityQueue<K extends Comparable<K>, V> {
 	private Node<K, V>[] heap;
 	private int nbElements;
-	
+
+	public PriorityQueue(K key, V value)
+	{
+		this.nbElements = 0;
+		this.heap = new Node[0];
+	}
+
 	private class Node<K extends Comparable<K>, V>{
 		private K key;
 		private V value;
