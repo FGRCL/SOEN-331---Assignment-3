@@ -57,7 +57,7 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 
 	@requires 	({	"$this.nbElements != 0",
 				})
-	@ensures	({	"$this.nbElements == $old($this.nbElements",
+	@ensures	({	"$this.nbElements == $old($this.nbElements)",
 					"$result != null"
 				})
 	public Node min() {
