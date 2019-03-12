@@ -27,10 +27,11 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 	}
 	
 	private V remove() {
+		return null;
 	}
 	
 	private V min() {
-		
+		return null;
 	}
 	
 	private int parent(int i) { 
