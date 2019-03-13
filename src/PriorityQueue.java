@@ -8,6 +8,8 @@ import be.ac.ua.ansymo.adbc.annotations.requires;
 public class PriorityQueue<K extends Comparable<K>, V> {
 	public Node<K, V>[] heap;
 	public int nbElements;
+	public Class<K> keyParameterClass;
+	public Class<V> valueParameterClass;
 
 	public class Node<K extends Comparable<K>, V>{
 		private K key;
@@ -27,29 +29,36 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		}
 	}
 
-	@requires 	({	"heapSize >= 0",
+	@requires 	({	"true"
 				})
 	@ensures	({	"$this.heap != null",
 				})
-	public PriorityQueue(int heapSize)
-	{
+	public PriorityQueue(Class<K> keyParameterClass, Class<V> valueParameterClass){
+		this.keyParameterClass = keyParameterClass;
+		this.valueParameterClass = valueParameterClass;
 		this.nbElements = 0;
-		this.heap = new Node[heapSize];
+		this.heap = new Node[15];
 	}
 
 	@requires 	({	"key != null",
 					"value != null",
-					"key.getClass().equals(K.class)",
-					"value.getClass().equals(V.class)"
+					"$this.keyParameterClass.isInstance(key)",
+					"$this.valueParameterClass.isInstance(value)"
 				})
 	@ensures	({	"$this.nbElements == $old($this.nbElements) + 1",
 					"$this.contains(value) == $old($this.contains(value)) + 1"
 				})
 	public void insert(K key, V value) {
 		Node insertNode = new Node(key, value);
+		if(nbElements >= heap.length) {
+			copyAndDouble();
+		}
+		heap[nbElements] = insertNode;
+		if(nbElements > 0) trickleUp(nbElements);
+		nbElements++;
 	}
 	
-	@requires 	({	"$this.nbElements != 0",
+	@requires 	({	"$this.nbElements != 0"
 				})
 	@ensures	({	"$this.nbElements == $old($this.nbElements) - 1",
 					"$this.contains(value) == $old($this.contains(value)) - 1",
@@ -59,7 +68,7 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		V return_value = (V) this.min().getValue();
 		this.heap[0] = this.heap[this.heap.length-1];
 		this.nbElements--;
-		this.settleHeap(0);
+		if(nbElements > 0) this.settleHeap(0);
 
 		if (this.nbElements <= heap.length/4)
 		{
@@ -125,7 +134,7 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 	}
 
 	private void trickleUp(int elem) {
-		while((heap[elem].getKey().compareTo(heap[parent(elem)].getKey()) < 0 && !isRoot(elem))) {
+		while(!isRoot(elem) && heap[elem].getKey().compareTo(heap[parent(elem)].getKey()) < 0) {
 			swap(elem, parent(elem));
 			elem = parent(elem);
 		}
@@ -147,5 +156,13 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 			leftCompare = heap[elem].getKey().compareTo(heap[leftChild(elem)].getKey());
 			rightCompare = heap[elem].getKey().compareTo(heap[rightChild(elem)].getKey());
 		}
+	}
+	
+	private void copyAndDouble() {
+		Node[] doubleHeap = new Node[heap.length * 2];
+		for(int i=0; i<heap.length; i++) {
+			doubleHeap[i] = heap[i];
+		}
+		heap = doubleHeap;
 	}
 }
