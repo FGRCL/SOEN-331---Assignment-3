@@ -68,16 +68,19 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		V return_value = (V) this.min();
 		this.heap[0] = this.heap[nbElements-1];
 		this.nbElements--;
-		if(nbElements > 0) this.settleHeap(0);
-
-		if (this.nbElements <= heap.length/4)
+		if(nbElements > 0)
 		{
-			Node[] newHeap = new Node[heap.length/2];
-			for(int i = 0; i < nbElements; i++)
+			this.settleHeap(0);
+
+			if (this.nbElements <= heap.length/4)
 			{
-				newHeap[i] = this.heap[i];
+				Node[] newHeap = new Node[heap.length/2];
+				for(int i = 0; i < nbElements; i++)
+				{
+					newHeap[i] = this.heap[i];
+				}
+				this.heap = newHeap;
 			}
-			this.heap = newHeap;
 		}
 
 		return return_value;

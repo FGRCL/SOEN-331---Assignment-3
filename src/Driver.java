@@ -25,7 +25,7 @@ public class Driver {
         System.out.println("\nThe min is now: "+pq.min());
 
         System.out.println("\n\nLets remove everything now:");
-        for (int i = 0; i < test_length-1; i ++)
+        for (int i = 0; i < test_length; i ++)
         {
             System.out.println("Removing => "+pq.min());
             pq.remove();
