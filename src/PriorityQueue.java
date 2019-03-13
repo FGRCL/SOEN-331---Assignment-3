@@ -28,7 +28,11 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 			return value;
 		}
 	}
-	
+
+	@requires 	({	"true"
+				})
+	@ensures	({	"$this.heap != null",
+				})
 	public PriorityQueue(Class<K> keyParameterClass, Class<V> valueParameterClass){
 		this.keyParameterClass = keyParameterClass;
 		this.valueParameterClass = valueParameterClass;
@@ -42,7 +46,7 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 					"$this.valueParameterClass.isInstance(value)"
 				})
 	@ensures	({	"$this.nbElements == $old($this.nbElements) + 1",
-					"$this.contains(value) = $old($this.contains(value)) + 1"
+					"$this.contains(value) == $old($this.contains(value)) + 1"
 				})
 	public void insert(K key, V value) {
 		Node insertNode = new Node(key, value);
@@ -54,10 +58,10 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		nbElements++;
 	}
 	
-	@requires 	({	"$this.nbElements != 0",
+	@requires 	({	"$this.nbElements != 0"
 				})
 	@ensures	({	"$this.nbElements == $old($this.nbElements) - 1",
-					"!$this.contains($old($this.min()))",
+					"$this.contains(value) == $old($this.contains(value)) - 1",
 					"$result != null"
 				})
 	public V remove() {
@@ -79,7 +83,7 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		return return_value;
 	}
 
-	@requires 	({	"$this.nbElements != 0",
+	@requires 	({	"$this.nbElements != 0"
 				})
 	@ensures	({	"$this.nbElements == $old($this.nbElements)",
 					"$result != null"
@@ -88,12 +92,18 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		return heap[0];
 	}
 
-	public int contains(V value)
+	@requires 	({	"true"
+				})
+	@ensures	({	"$this.nbElements == $old($this.nbElements)",
+					"$result >= 0"
+				})
+	private int contains(V value)
 	{
 		int counter = 0;
-		for (Node node:this.heap)
+		for (Node node:this.heap) {
 			if (node.getValue().equals(value))
 				counter++;
+		}
 		return counter;
 	}
 
