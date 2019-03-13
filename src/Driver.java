@@ -6,7 +6,9 @@ public class Driver {
     public static void main (String[] args)
     {
         System.out.println("Hello, World!");
-        PriorityQueue<Integer, Integer> pq = new PriorityQueue<Integer, Integer>();
+        PriorityQueue<Integer, Integer> pq = new PriorityQueue<Integer, Integer>(Integer.class, Integer.class);
         pq.insert(10, 10);
+        pq.min();
+        pq.remove();
     }
 }
