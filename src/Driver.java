@@ -11,7 +11,7 @@ public class Driver {
 
         int test_length = 10;
 
-        Random rand = new Random(322);
+        Random rand = new Random(345345);
 
         PriorityQueue<Integer, Integer> pq = new PriorityQueue<Integer, Integer>(Integer.class, Integer.class);
 

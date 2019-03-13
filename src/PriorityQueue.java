@@ -65,12 +65,12 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 					"$result != null"
 				})
 	public V remove() {
-		V return_value = (V) this.min();
-		this.heap[0] = this.heap[nbElements-1];
-		this.nbElements--;
 		if(nbElements > 0)
 		{
-			this.settleHeap(0);
+			V return_value = (V) this.min();
+			this.heap[0] = this.heap[nbElements-1];
+			this.nbElements--;
+			if (this.nbElements > 0)this.settleHeap(0);
 
 			if (this.nbElements <= heap.length/4)
 			{
@@ -81,9 +81,9 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 				}
 				this.heap = newHeap;
 			}
+			return return_value;
 		}
-
-		return return_value;
+		return null;
 	}
 
 	@requires 	({	"$this.nbElements != 0"
