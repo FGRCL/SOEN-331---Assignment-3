@@ -65,15 +65,15 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 					"$result != null"
 				})
 	public V remove() {
-		V return_value = (V) this.min().getValue();
-		this.heap[0] = this.heap[this.heap.length-1];
+		V return_value = (V) this.min();
+		this.heap[0] = this.heap[nbElements-1];
 		this.nbElements--;
 		if(nbElements > 0) this.settleHeap(0);
 
 		if (this.nbElements <= heap.length/4)
 		{
-			Node[] newHeap = new Node[heap.length/4];
-			for(int i = 0; i < newHeap.length; i++)
+			Node[] newHeap = new Node[heap.length/2];
+			for(int i = 0; i < nbElements; i++)
 			{
 				newHeap[i] = this.heap[i];
 			}
@@ -88,8 +88,8 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 	@ensures	({	"$this.nbElements == $old($this.nbElements)",
 					"$result != null"
 				})
-	public Node min() {
-		return heap[0];
+	public V min() {
+		return heap[0].getValue();
 	}
 
 	@requires 	({	"true"
