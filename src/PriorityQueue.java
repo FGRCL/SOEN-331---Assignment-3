@@ -39,7 +39,7 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 					"value.getClass().equals(V.class)"
 				})
 	@ensures	({	"$this.nbElements == $old($this.nbElements) + 1",
-					"$this.contains(value) = $old($this.contains(value)) + 1"
+					"$this.contains(value) == $old($this.contains(value)) + 1"
 				})
 	public void insert(K key, V value) {
 		Node insertNode = new Node(key, value);
@@ -48,7 +48,7 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 	@requires 	({	"$this.nbElements != 0",
 				})
 	@ensures	({	"$this.nbElements == $old($this.nbElements) - 1",
-					"!$this.contains($old($this.min()))",
+					"$this.contains(value) == $old($this.contains(value)) - 1",
 					"$result != null"
 				})
 	public V remove() {
