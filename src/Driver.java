@@ -1,6 +1,7 @@
 import be.ac.ua.ansymo.adbc.annotations.requires;
 
 import java.util.Random;
+import java.time.Instant;
 
 public class Driver {
 
@@ -11,9 +12,9 @@ public class Driver {
 
         int test_length = 10;
 
-        Random rand = new Random(345345);
+        Random rand = new Random();
 
-        PriorityQueue<Integer, Integer> pq = new PriorityQueue<Integer, Integer>(Integer.class, Integer.class);
+        PriorityQueue<Integer, Integer> pq = new PriorityQueue<>(Integer.class, Integer.class);
 
         for (int i = 0; i < test_length; i++)
         {

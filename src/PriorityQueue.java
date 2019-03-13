@@ -65,25 +65,25 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 					"$result != null"
 				})
 	public V remove() {
-		if(nbElements > 0)
-		{
-			V return_value = (V) this.min();
-			this.heap[0] = this.heap[nbElements-1];
-			this.nbElements--;
-			if (this.nbElements > 0)this.settleHeap(0);
+		// Save frist value in heap to return
+		V return_value = this.heap[0].getValue();
+		// Take the last element in the heap and place it at the beginning
+		this.heap[0] = this.heap[nbElements-1];
+		// Decrement the number of elements
+		this.nbElements--;
+		// If the heap still has anything in it, settle heap
+		if (this.nbElements > 0) { this.settleHeap(0); }
 
-			if (this.nbElements <= heap.length/4)
-			{
-				Node[] newHeap = new Node[heap.length/2];
-				for(int i = 0; i < nbElements; i++)
-				{
-					newHeap[i] = this.heap[i];
-				}
-				this.heap = newHeap;
-			}
-			return return_value;
-		}
-		return null;
+//		if (this.nbElements <= heap.length/4)
+//		{
+//			Node[] newHeap = new Node[heap.length/2];
+//			for(int i = 0; i < nbElements; i++)
+//			{
+//				newHeap[i] = this.heap[i];
+//			}
+//			this.heap = newHeap;
+//		}
+		return return_value;
 	}
 
 	@requires 	({	"$this.nbElements != 0"
