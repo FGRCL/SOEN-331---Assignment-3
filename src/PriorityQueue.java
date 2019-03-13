@@ -26,11 +26,15 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 			return value;
 		}
 	}
-	
-	public PriorityQueue()
+
+	@requires 	({	"heapSize >= 0",
+				})
+	@ensures	({	"$this.heap != null",
+				})
+	public PriorityQueue(int heapSize)
 	{
 		this.nbElements = 0;
-		this.heap = new Node[15];
+		this.heap = new Node[heapSize];
 	}
 
 	@requires 	({	"key != null",
@@ -70,7 +74,7 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		return return_value;
 	}
 
-	@requires 	({	"$this.nbElements != 0",
+	@requires 	({	"$this.nbElements != 0"
 				})
 	@ensures	({	"$this.nbElements == $old($this.nbElements)",
 					"$result != null"
@@ -79,12 +83,18 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		return heap[0];
 	}
 
+	@requires 	({	"true"
+				})
+	@ensures	({	"$this.nbElements == $old($this.nbElements)",
+					"$result >= 0"
+				})
 	private int contains(V value)
 	{
 		int counter = 0;
-		for (Node node:this.heap)
+		for (Node node:this.heap) {
 			if (node.getValue().equals(value))
 				counter++;
+		}
 		return counter;
 	}
 
