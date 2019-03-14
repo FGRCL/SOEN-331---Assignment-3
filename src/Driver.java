@@ -15,7 +15,7 @@ public class Driver {
 
         PriorityQueue<Integer, Integer> pq = new PriorityQueue<>(Integer.class, Integer.class, test_length);
 
-        for (int i = 0; i <= test_length; i++)
+        for (int i = 0; i < test_length; i++)
         {
             int key = rand.nextInt(100)+100;
             int value = rand.nextInt();

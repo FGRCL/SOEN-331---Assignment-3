@@ -56,7 +56,7 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 	})
 	@ensures ({
 			"$this.nbElements == $old($this.nbElements) + 1",
-			"$this.contains(key) == $old($this.contains(key)) + 1"
+			"$this.contains(value) == $old($this.contains(value)) + 1"
 	})
 	public void insert(K key, V value) {
 		Node insertNode = new Node(key, value);
@@ -70,7 +70,7 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 	})
 	@ensures ({
 			"$this.nbElements == $old($this.nbElements) - 1",
-			"$this.contains(key) == $old($this.contains(key)) - 1",
+			"$this.contains($result) == $old($this.contains($this.min())) - 1",
 			"$result != null",
 			"$result == $old($this.min())"
 	})
@@ -107,11 +107,11 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		return this.nbElements;
 	}
 
-	public int contains(K key)
+	public int contains(V value)
 	{
 		int counter = 0;
-		for (Node node:this.heap) {
-			if (node.getKey().equals(key))
+		for (int i=0; i<nbElements; i++) {
+			if (heap[i].getValue().equals(value))
 				counter++;
 		}
 		return counter;
