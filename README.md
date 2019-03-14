@@ -12,9 +12,9 @@ Programming Language
 Tools
 =====
 
-## AspectJ
+### AspectJ
 AspectJ is an aspect-oriented programming (AOP) extension created at PARC for the Java programming language.
-### Installation
+***Installation***
 - **Using Eclipse** . 
 AspectJ can be easily acquired within Eclipse using AJDT (AspectJ Development Tools).
 
@@ -26,7 +26,9 @@ AspectJ can be easily acquired within Eclipse using AJDT (AspectJ Development To
 ***FILL THIS IN***
 
 
-## adbc - Design by Contract for AspectJ
+
+
+### adbc - Design by Contract for AspectJ
 
 ![adbc logo](https://raw.github.com/timmolderez/adbc/master/doc/adbc.png)
 
@@ -40,12 +42,12 @@ Adbc is a small library that adds support for [design by contract](http://en.wik
 ### [Download adbc](http://timmolderez.be/builds/adbc/)
 
 
-### Requirements
+***Requirements***
 
 - Java 6 (or later)
 - AspectJ (tested on versions 1.6.12 and 1.7.2)
 
-### Usage
+***Usage***
 
 When using Eclipse+AJDT, just add `adbc.jar` to your project's InPath and you can start writing contracts (using the annotations in `be.ac.ua.ansymo.adbc.annotations`). Contract enforcement is automatically enabled, and can be disabled if needed via the `AdbcConfig` class. 
 For more information, be sure to have a look at adbc's [documentation](https://raw.github.com/timmolderez/adbc/master/doc/README.pdf).
