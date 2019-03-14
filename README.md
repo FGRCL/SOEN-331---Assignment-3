@@ -26,9 +26,6 @@ AspectJ can be easily acquired within Eclipse using AJDT (AspectJ Development To
 5. Restart Eclipse
 6. File > New > AspectJ Project
 
-
-- **IntelliJ** <br>
-TOOOODDDDOOOOO
 <br>
 
 ### adbc - Design by Contract for AspectJ
@@ -62,6 +59,3 @@ For more information, be sure to have a look at adbc's [documentation](https://r
 4. Add External JARs > Select previously installed adbc JAR
 
 Now you can use adbc by simply importing ***be.ac.ua.ansymo.adbc.annotations.***
-
-- **IntelliJ** <br>
-TODOOOOO
