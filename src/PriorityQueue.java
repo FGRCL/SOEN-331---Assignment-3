@@ -34,7 +34,7 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 	}
 
 	@requires ({
-			"$this.capacity > 0"
+			"capacity > 0"
 	})
 	@ensures ({
 			"$this.heap != null"
