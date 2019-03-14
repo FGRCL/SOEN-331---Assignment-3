@@ -2,9 +2,11 @@ import be.ac.ua.ansymo.adbc.annotations.ensures;
 import be.ac.ua.ansymo.adbc.annotations.invariant;
 import be.ac.ua.ansymo.adbc.annotations.requires;
 
-@invariant ({	"$this.nbElements <= $this.heap.length",
-				"$this.nbElements >= 0"
-			})
+@invariant ({
+		"$this.capacity > 0",
+		"$this.nbElements <= $this.capacity",
+		"$this.nbElements >= 0"
+})
 public class PriorityQueue<K extends Comparable<K>, V> {
 
 	public Node<K, V>[] heap;
@@ -31,10 +33,12 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		}
 	}
 
-	@requires 	({	"true"
-				})
-	@ensures	({	"$this.heap != null",
-				})
+	@requires ({
+			"$this.capacity > 0"
+	})
+	@ensures ({
+			"$this.heap != null"
+	})
 	public PriorityQueue(Class<K> keyParameterClass, Class<V> valueParameterClass, int capacity){
 		this.keyParameterClass = keyParameterClass;
 		this.valueParameterClass = valueParameterClass;
@@ -43,30 +47,34 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		this.capacity = capacity;
 	}
 
-	@requires 	({	"key != null",
-					"value != null",
-					"$this.keyParameterClass.isInstance(key)",
-					"$this.valueParameterClass.isInstance(value)"
-				})
-	@ensures	({	"$this.nbElements == $old($this.nbElements) + 1",
-					"$this.contains(value) == $old($this.contains(value)) + 1"
-				})
+	@requires ({
+			"key != null",
+			"value != null",
+			"$this.keyParameterClass.isInstance(key)",
+			"$this.valueParameterClass.isInstance(value)",
+			"$this.isFull() == false",
+			"false"
+	})
+	@ensures ({
+			"$this.nbElements == $old($this.nbElements) + 1",
+			"$this.contains(value) == $old($this.contains(value)) + 1"
+	})
 	public void insert(K key, V value) {
 		Node insertNode = new Node(key, value);
-		if(nbElements >= heap.length) {
-			copyAndDouble();
-		}
 		heap[nbElements] = insertNode;
 		if(nbElements > 0) trickleUp(nbElements);
 		nbElements++;
 	}
 	
-	@requires 	({	"$this.nbElements != 0"
-				})
-	@ensures	({	"$this.nbElements == $old($this.nbElements) - 1",
-					"$this.contains(value) == $old($this.contains(value)) - 1",
-					"$result != null"
-				})
+	@requires ({
+			"$this.isEmpty() == false"
+	})
+	@ensures ({
+			"$this.nbElements == $old($this.nbElements) - 1",
+			"$this.contains(value) == $old($this.contains(value)) - 1",
+			"$result != null",
+			"$result == $old($this.min())"
+	})
 	public V remove() {
 		// Save frist value in heap to return
 		V return_value = this.heap[0].getValue();
@@ -76,34 +84,31 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		this.nbElements--;
 		// If the heap still has anything in it, settle heap
 		if (this.nbElements > 0) { this.settleHeap(0); }
-
-//		if (this.nbElements <= heap.length/4)
-//		{
-//			Node[] newHeap = new Node[heap.length/2];
-//			for(int i = 0; i < nbElements; i++)
-//			{
-//				newHeap[i] = this.heap[i];
-//			}
-//			this.heap = newHeap;
-//		}
 		return return_value;
 	}
 
-	@requires 	({	"$this.nbElements != 0"
-				})
-	@ensures	({	"$this.nbElements == $old($this.nbElements)",
-					"$result != null"
-				})
+	@requires ({
+			"$this.isEmpty() == false"
+	})
+	@ensures ({
+			"$this.nbElements == $old($this.nbElements)",
+			"$result != null"
+	})
 	public V min() {
 		return heap[0].getValue();
 	}
 
-	@requires 	({	"true"
-				})
-	@ensures	({	"$this.nbElements == $old($this.nbElements)",
-					"$result >= 0"
-				})
-	private int contains(V value)
+	@requires({
+			"true"
+	})
+	@ensures({
+			"$result >= 0"
+	})
+	public int getSize() {
+		return this.nbElements;
+	}
+
+	public int contains(V value)
 	{
 		int counter = 0;
 		for (Node node:this.heap) {
@@ -132,7 +137,7 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 	private boolean hasChild(int elem) {
 		return (leftChild(elem)<=(nbElements-1)  || rightChild(elem)<=(nbElements-1));
 	}
-	
+
 	private void swap(int a, int b) {
 		Node temp = heap[a];
 		heap[a] = heap[b];
@@ -169,11 +174,13 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 		}
 	}
 	
-	private void copyAndDouble() {
-		Node[] doubleHeap = new Node[heap.length * 2];
-		for(int i=0; i<heap.length; i++) {
-			doubleHeap[i] = heap[i];
-		}
-		heap = doubleHeap;
+	public boolean isFull() {
+		return this.nbElements == this.capacity;
 	}
+
+	public boolean isEmpty() {
+		return this.nbElements == 0;
+	}
+
+
 }

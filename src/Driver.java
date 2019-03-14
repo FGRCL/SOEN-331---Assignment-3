@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Driver {
 
-    @requires("args.length >= 0")
+    @requires({"args.length >= 0"})
     public static void main (String[] args)
     {
         System.out.println("Hello, World!");
@@ -13,9 +13,9 @@ public class Driver {
 
         Random rand = new Random();
 
-        PriorityQueue<Integer, Integer> pq = new PriorityQueue<>(Integer.class, Integer.class, 42);
+        PriorityQueue<Integer, Integer> pq = new PriorityQueue<>(Integer.class, Integer.class, test_length);
 
-        for (int i = 0; i < test_length; i++)
+        for (int i = 0; i <= test_length; i++)
         {
             int key = rand.nextInt(100)+100;
             int value = rand.nextInt();
