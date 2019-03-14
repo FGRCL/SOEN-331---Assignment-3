@@ -61,6 +61,6 @@ For more information, be sure to have a look at adbc's [documentation](https://r
 3. AspectJ Build > InPath
 4. Add External JARs > Select previously installed adbc JAR
 
-Now you can use adbc by simply importing "be.ac.ua.ansymo.adbc.annotations.*"
+Now you can use adbc by simply importing ***be.ac.ua.ansymo.adbc.annotations.***
 
 - **IntelliJ** <br>
