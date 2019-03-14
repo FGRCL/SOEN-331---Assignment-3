@@ -1,30 +1,36 @@
-Objectives
-==========
+# Objectives
 
 To implement a Bounded Priority Queue ADT (Dbstract Data Type) where each element inserted into the queue is made up of a key-value pair: the key determines the elements prioroti within the queue. 
 The first-in/first-out rule is not enforced in this data structre as the elements with a higher priority will be dequeued first (FIFO). If, however, two or more elements are equally prioritized, the FIFO policy is thus observed.
 
-Programming Language
-====================
+# Programming Language
 
 - Java
 
-Tools
-=====
+# Tools
 
-## 1. AspectJ
-AspectJ is an aspect-oriented programming (AOP) extension created at PARC for the Java programming language.
-### Installation
-- Eclipse 
-    AspectJ can be easily acquired within Eclipse using AJDT (AspectJ Development Tools).
+### AspectJ
+AspectJ is an aspect-oriented programming (AOP) extension created at PARC for the Java programming language. .  
+
+***Installation & Usage***
+- **Eclipse** <br>
+AspectJ can be easily acquired within Eclipse using AJDT (AspectJ Development Tools). <br>
+    1. Help > install new software
+    2. add
+    - name : Name for software
+    - Location : http://download.eclipse.org/tools/ajdt/410/dev/update (Eclipse V 4.10) 
+    - Location : http://download.eclipse.org/tools/ajdt/48/dev/update (Eclipse V 4.8)
+    - Location : http://download.eclipse.org/tools/ajdt/47/dev/update (Eclipse V 4.7)
+3. Select all that apply > Next > Next
+4. Accept terms and condition > Finish
+5. Restart Eclipse
+6. File > New > AspectJ Project
     
-    
-- IntelliJ
-
-***FILL THIS IN***
+- **IntelliJ**
+TOOOODDDDOOOOO . 
 
 
-## 2. adbc - Design by Contract for AspectJ
+## adbc - Design by Contract for AspectJ
 
 ![adbc logo](https://raw.github.com/timmolderez/adbc/master/doc/adbc.png)
 
@@ -38,12 +44,12 @@ Adbc is a small library that adds support for [design by contract](http://en.wik
 ### [Download adbc](http://timmolderez.be/builds/adbc/)
 
 
-### Requirements
+***Requirements***
 
 - Java 6 (or later)
 - AspectJ (tested on versions 1.6.12 and 1.7.2)
 
-### Usage
+***Usage***
 
 When using Eclipse+AJDT, just add `adbc.jar` to your project's InPath and you can start writing contracts (using the annotations in `be.ac.ua.ansymo.adbc.annotations`). Contract enforcement is automatically enabled, and can be disabled if needed via the `AdbcConfig` class. 
 For more information, be sure to have a look at adbc's [documentation](https://raw.github.com/timmolderez/adbc/master/doc/README.pdf).
