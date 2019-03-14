@@ -52,10 +52,10 @@ Adbc is a small library that adds support for [design by contract](http://en.wik
 
 ***Installation & Usage***
 
+- **Eclipse** <br>
 When using Eclipse+AJDT, just add `adbc.jar` to your project's InPath and you can start writing contracts (using the annotations in `be.ac.ua.ansymo.adbc.annotations`). Contract enforcement is automatically enabled, and can be disabled if needed via the `AdbcConfig` class. 
 For more information, be sure to have a look at adbc's [documentation](https://raw.github.com/timmolderez/adbc/master/doc/README.pdf).
 
-- **Eclipse** <br>
 1. Download adbc JAR (see link above)
 2. Right-click on AspectJ project folder > Properties
 3. AspectJ Build > InPath
