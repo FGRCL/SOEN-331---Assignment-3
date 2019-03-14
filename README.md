@@ -25,8 +25,8 @@ AspectJ can be easily acquired within Eclipse using AJDT (AspectJ Development To
 4. Accept terms and condition > Finish
 5. Restart Eclipse
 6. File > New > AspectJ Project
-    
-<br>
+
+
 - **IntelliJ** <br>
 TOOOODDDDOOOOO . 
 
