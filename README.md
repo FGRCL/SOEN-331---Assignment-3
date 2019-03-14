@@ -28,7 +28,7 @@ AspectJ can be easily acquired within Eclipse using AJDT (AspectJ Development To
 
 
 - **IntelliJ** <br>
-TOOOODDDDOOOOO . 
+TOOOODDDDOOOOO
 
 <br>
 ## adbc - Design by Contract for AspectJ
