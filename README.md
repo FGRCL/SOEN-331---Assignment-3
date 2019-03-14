@@ -14,10 +14,9 @@ AspectJ is an aspect-oriented programming (AOP) extension created at PARC for th
 
 ***Installation & Usage***
 - **Eclipse** <br>
-AspectJ can be easily acquired within Eclipse using AJDT (AspectJ Development Tools). .
-
+AspectJ can be easily acquired within Eclipse using AJDT (AspectJ Development Tools).
 1. Help > install new software
-2. add . 
+2. add
     - name : Name for software
     - Location : http://download.eclipse.org/tools/ajdt/410/dev/update (Eclipse V 4.10) 
     - Location : http://download.eclipse.org/tools/ajdt/48/dev/update (Eclipse V 4.8)
