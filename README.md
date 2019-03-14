@@ -9,16 +9,29 @@ The first-in/first-out rule is not enforced in this data structre as the element
 
 # Tools
 
-## AspectJ
+### AspectJ
 AspectJ is an aspect-oriented programming (AOP) extension created at PARC for the Java programming language. .  
 
-***Installation***
-- **Using Eclipse** . 
-AspectJ can be easily acquired within Eclipse using AJDT (AspectJ Development Tools).
+***Installation & Usage***
+- **Eclipse** . 
+AspectJ can be easily acquired within Eclipse using AJDT (AspectJ Development Tools). .
+
+1. Help > install new software
+2. add . 
+    - name : Name for software
+    - Location : http://download.eclipse.org/tools/ajdt/410/dev/update (Eclipse V 4.10) 
+    - Location : http://download.eclipse.org/tools/ajdt/48/dev/update (Eclipse V 4.8)
+    - Location : http://download.eclipse.org/tools/ajdt/47/dev/update (Eclipse V 4.7)
+3. Select all that apply > Next > Next
+4. Accept terms and condition > Finish
+5. Restart Eclipse . 
+
+
+
 
     
     
-- **Using IntelliJ** . 
+- **IntelliJ** . 
 
 
 ***FILL THIS IN***
