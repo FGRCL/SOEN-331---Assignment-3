@@ -1,7 +1,6 @@
 import be.ac.ua.ansymo.adbc.annotations.requires;
 
 import java.util.Random;
-import java.time.Instant;
 
 public class Driver {
 
@@ -14,7 +13,7 @@ public class Driver {
 
         Random rand = new Random();
 
-        PriorityQueue<Integer, Integer> pq = new PriorityQueue<>(Integer.class, Integer.class);
+        PriorityQueue<Integer, Integer> pq = new PriorityQueue<>(Integer.class, Integer.class, 42);
 
         for (int i = 0; i < test_length; i++)
         {
@@ -23,13 +22,23 @@ public class Driver {
             System.out.println("Inserting => ("+key+",\t"+key+")");
             pq.insert(key, key);
         }
-        System.out.println("\nThe min is now: "+pq.min());
+        System.out.println();
+        printHeap(pq);
 
-        System.out.println("\n\nLets remove everything now:");
+        System.out.println("\n\nLets remove everything now:\n");
         for (int i = 0; i < test_length; i ++)
         {
             System.out.println("Removing => "+pq.min());
             pq.remove();
+            //printHeap(pq);
         }
+    }
+
+    private static void printHeap(PriorityQueue pq)
+    {
+        for(int i=0; i < pq.nbElements; i++){
+            System.out.print(pq.heap[i].getValue()+" ");
+        }
+        System.out.println();
     }
 }

@@ -6,7 +6,9 @@ import be.ac.ua.ansymo.adbc.annotations.requires;
 				"$this.nbElements >= 0"
 			})
 public class PriorityQueue<K extends Comparable<K>, V> {
+
 	public Node<K, V>[] heap;
+	public int capacity;
 	public int nbElements;
 	public Class<K> keyParameterClass;
 	public Class<V> valueParameterClass;
@@ -33,11 +35,12 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 				})
 	@ensures	({	"$this.heap != null",
 				})
-	public PriorityQueue(Class<K> keyParameterClass, Class<V> valueParameterClass){
+	public PriorityQueue(Class<K> keyParameterClass, Class<V> valueParameterClass, int capacity){
 		this.keyParameterClass = keyParameterClass;
 		this.valueParameterClass = valueParameterClass;
 		this.nbElements = 0;
-		this.heap = new Node[15];
+		this.heap = new Node[capacity];
+		this.capacity = capacity;
 	}
 
 	@requires 	({	"key != null",
@@ -142,22 +145,27 @@ public class PriorityQueue<K extends Comparable<K>, V> {
 			elem = parent(elem);
 		}
 	}
-	
+
 	private void settleHeap(int elem) {
-		int leftCompare = heap[elem].getKey().compareTo(heap[leftChild(elem)].getKey());
-		int rightCompare = heap[elem].getKey().compareTo(heap[rightChild(elem)].getKey());
-		while(hasChild(elem) && (leftCompare < 0 || rightCompare < 0)){
-			if(leftCompare <= rightCompare) {
+		boolean leftLessThanElem;
+		boolean righLessThanElem;
+		boolean leftLessThanRight;
+
+		while (hasChild(elem)) {
+			leftLessThanElem = heap[leftChild(elem)].getKey().compareTo(heap[elem].getKey()) < 0;
+			righLessThanElem = heap[rightChild(elem)].getKey().compareTo(heap[elem].getKey()) < 0;
+			leftLessThanRight = heap[leftChild(elem)].getKey().compareTo(heap[rightChild(elem)].getKey()) < 0;
+
+			if (leftLessThanElem && leftLessThanRight) {
 				swap(elem, leftChild(elem));
 				elem = leftChild(elem);
-			}else if(rightCompare < leftCompare) {
+			} else if (righLessThanElem) {
 				swap(elem, rightChild(elem));
 				elem = rightChild(elem);
-			}else {
-				System.out.println("that didn't make sense.");
+			} else {
+				break;
 			}
-			leftCompare = heap[elem].getKey().compareTo(heap[leftChild(elem)].getKey());
-			rightCompare = heap[elem].getKey().compareTo(heap[rightChild(elem)].getKey());
+
 		}
 	}
 	
