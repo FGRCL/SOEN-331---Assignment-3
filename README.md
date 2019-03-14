@@ -12,19 +12,21 @@ Programming Language
 Tools
 =====
 
-## 1. AspectJ
+## AspectJ
 AspectJ is an aspect-oriented programming (AOP) extension created at PARC for the Java programming language.
 ### Installation
-- **Eclipse**
+- **Using Eclipse** . 
 AspectJ can be easily acquired within Eclipse using AJDT (AspectJ Development Tools).
+
     
     
-- **IntelliJ**
+- **Using IntelliJ** . 
+
 
 ***FILL THIS IN***
 
 
-## 2. adbc - Design by Contract for AspectJ
+## adbc - Design by Contract for AspectJ
 
 ![adbc logo](https://raw.github.com/timmolderez/adbc/master/doc/adbc.png)
 
